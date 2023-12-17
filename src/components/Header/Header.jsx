@@ -9,7 +9,7 @@ const Header = () => {
     <div className={'header'}>
         <Button onClick={onClose}>Закрыть</Button>
         <span className={'username'}>
-            {tg.initDataUnsave?.user?.username}    
+            {user?.username}    
         </span> //span - строчный элемент, для выбора части текста 
         
     </div>
