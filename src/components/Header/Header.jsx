@@ -1,6 +1,7 @@
 import React from 'react'
 import Button from '../Button/Button'
 import { useTelegram } from '../../hooks/useTelegram';
+import './Header.css';
 
 const Header = () => {
   const {user, onClose} = useTelegram();
@@ -10,9 +11,9 @@ const Header = () => {
         <Button onClick={onClose}>Закрыть</Button>
         <span className={'username'}>
             {user?.username}    
-        </span> //span - строчный элемент, для выбора части текста 
-        
+        </span> 
     </div>
+    //span - строчный элемент, для выбора части текста-->
   );
 }
 
