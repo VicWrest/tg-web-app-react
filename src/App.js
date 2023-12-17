@@ -1,15 +1,17 @@
 import './App.css';
 import {useEffect} from 'react'
+import { useTelegram } from '../../hooks/useTelegram';
 
 function App() {
+  const {onToggleButton} = useTelegram();
+
   useEffect(() => {
     tg.ready(); //приложение полностью проинициализировалось и его можно отрисовывать
   });
   
   return (
     <div className="App">
-      work
-      <button onClick={onClose}>Закрыть</button>
+      <button onClick={onToggleButton}>Toggle</button>
     </div>
   );
 }
