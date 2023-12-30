@@ -7,7 +7,7 @@ import ProductList from './components/ProductList/productList';
 import Form from './components/Form/form';
 
 function App() {
-  const {onToggleButton, tg} = useTelegram();
+  const {tg} = useTelegram();
 
   useEffect(() => {
     tg.ready(); //приложение полностью проинициализировалось и его можно отрисовывать

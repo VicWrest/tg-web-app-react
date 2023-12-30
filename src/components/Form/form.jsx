@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Button from '../Button/Button'
 import { useTelegram } from '../../hooks/useTelegram';
 import './form.css';
 
@@ -13,6 +12,8 @@ const Form = () => {
         tg.MainButton.setParams({
             text: "Отправить данные"
         })
+        //строка ниже пишется для того, чтобы не было ошибки отсутствующапя зависимость
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() =>{
@@ -22,6 +23,7 @@ const Form = () => {
         else{
             tg.MainButton.show();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [country, street]);
 
     const onChangeCountry = (e) => {
