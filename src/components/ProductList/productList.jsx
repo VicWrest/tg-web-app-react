@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import './productList.css';
+import ProductItem from "../ProductItem/ProductItem";
 import { useTelegram } from '../../hooks/useTelegram';
-
-const{tg} = useTelegram();
 
 const products = [
   {id: '1', title: 'Джинсы', price: 5000, description: 'Синего цвета, прямые'},
@@ -17,11 +16,12 @@ const products = [
 
 const getTotalPrice = items =>{
   return items.reduce((acc, item) => {
-    acc += item.price;
+    return acc += item.price;
   }, 0)
 }; 
 
 const ProductList = () => {
+  const{tg} = useTelegram();
   const [addedItems, setAddedItems] = useState([])
 
   const onAdd = (product) => { //добавление товара в корзину
