@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import './productList.css';
 import ProductItem from "../ProductItem/ProductItem";
 import { useTelegram } from '../../hooks/useTelegram';
@@ -14,6 +14,7 @@ const products = [
   {id: '8', title: 'Куртка 5', price: 12000, description: 'Зеленого цвета, теплая'},
 ]
 
+
 const getTotalPrice = items =>{
   return items.reduce((acc, item) => {
     return acc += item.price;
@@ -21,8 +22,34 @@ const getTotalPrice = items =>{
 }; 
 
 const ProductList = () => {
+  //отправка данныx
+
   const{tg} = useTelegram();
   const [addedItems, setAddedItems] = useState([])
+
+  const onSendData = useCallback(() => {
+    const data = {
+        products: addedItems,
+        totalPrice: getTotalPrice(addedItems)
+    }
+    fetch('http://localhost:8000/web-data', {
+      method: "POST",
+      headers: {
+        "Content-Type": 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+    tg.sendData(JSON.stringify(data));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [addedItems]);
+
+  useEffect(() => {
+    tg.onEvent('mainButtonClicked', onSendData)
+    return () => {
+        tg.offEvent('mainButtonClicked', onSendData)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [onSendData]);
 
   const onAdd = (product) => { //добавление товара в корзину
     const alreadyAdded = addedItems.find(item => item.id === product.id);

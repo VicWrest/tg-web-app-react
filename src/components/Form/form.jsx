@@ -24,7 +24,8 @@ const Form = () => {
         return () => {
             tg.offEvent('mainButtonClicked', onSendData)
         }
-    })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [onSendData]);
     useEffect(() => {
         tg.MainButton.setParams({
             text: "Отправить данные"
